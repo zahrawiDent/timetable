@@ -187,6 +187,8 @@ export default function App() {
             type="button"
             aria-label={`تصدير الجدول كصورة للمجموعة ${selectedGroup()}`}
             class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50 w-full sm:w-auto"
+            id="export-button"
+            data-umami-event="Export button"
           >
             📸 Export as PNG
           </button>
