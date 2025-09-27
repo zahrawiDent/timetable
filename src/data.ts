@@ -45,7 +45,7 @@ export type Timetable = {
   };
 };
 
-export const year5: Record<string, Timetable> = {
+export const timetableData: Record<string, Timetable> = {
   "المجموعة 1-2": {
     ...commonLectures,
     "السبت": {

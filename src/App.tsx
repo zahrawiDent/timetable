@@ -1,5 +1,5 @@
 import { Show, createMemo, createSignal, For } from "solid-js";
-import { TIME_SLOTS, year5, type ClassData, type Timetable } from "./data";
+import { TIME_SLOTS, timetableData, type ClassData, type Timetable } from "./data";
 import html2canvas from 'html2canvas-pro';
 
 type TimetableProps = {
@@ -114,26 +114,33 @@ const Timetable = (props: TimetableProps) => {
         </table>
       </div>
       {/* Legend */}
-      {/* <div class="mt-6 flex flex-wrap gap-4 justify-center" aria-label="الشرح" role="group"> */}
-      {/*   <ul class="flex flex-wrap gap-4 justify-center" role="list"> */}
-      {/*     <li class="flex items-center gap-2"> */}
-      {/*       <span class="w-4 h-4 bg-blue-100 border border-blue-300 rounded" aria-hidden="true"></span> */}
-      {/*       <span class="text-sm text-gray-700">Lecture</span> */}
-      {/*     </li> */}
-      {/*     <li class="flex items-center gap-2"> */}
-      {/*       <span class="w-4 h-4 bg-green-100 border border-green-300 rounded" aria-hidden="true"></span> */}
-      {/*       <span class="text-sm text-gray-700">Lab</span> */}
-      {/*     </li> */}
-      {/*   </ul> */}
-      {/* </div> */}
+      <div class="mt-6 flex flex-wrap gap-4 justify-center" aria-label="الشرح" role="group">
+        <ul class="flex flex-wrap gap-4 justify-center" role="list">
+          <li class="flex items-center gap-2">
+            <span class="w-4 h-4 bg-blue-100 border border-blue-300 rounded" aria-hidden="true"></span>
+            <span class="text-sm text-gray-700">Lecture</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-4 h-4 bg-green-100 border border-green-300 rounded" aria-hidden="true"></span>
+            <span class="text-sm text-gray-700">Lab</span>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
 
 export default function App() {
   // Group selection
-  const groups = Object.keys(year5);
+  const groups = Object.keys(timetableData);
   const [selectedGroup, setSelectedGroup] = createSignal(groups[0] || "");
+
+  // Display helper: show only the numeric range for the group (e.g., "1-2")
+  const displayGroup = (g: string) => {
+    // Prefer extracting numbers and hyphens in case format changes slightly
+    const match = g.match(/\d+(?:-\d+)?/);
+    return match ? match[0] : g.replace(/^المجموعة\s*/, '').trim();
+  };
 
   // Wrapper ref to include legend + table in export
   let captureRef: HTMLDivElement | undefined;
@@ -161,25 +168,25 @@ export default function App() {
   return (
     <div class="min-h-screen bg-gray-50 py-8 flex flex-col items-center" >
       {/* Controls */}
-      <div class="w-full max-w-5xl px-4 flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-2">
+      <div class="w-full max-w-5xl px-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex w-full sm:w-auto items-center gap-2">
           <label for="group-select" class="text-sm text-gray-700">اختر المجموعة:</label>
           <select
             id="group-select"
-            class="border border-gray-300 rounded-md px-3 py-2 text-sm bg-white shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50"
+            class="border border-gray-300 rounded-md px-3 py-2 text-sm bg-white shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50 w-full sm:w-48 md:w-64"
             onChange={(e) => setSelectedGroup((e.target as HTMLSelectElement).value)}
             value={selectedGroup()}
           >
-            <For each={groups}>{(g) => <option value={g}>{g}</option>}</For>
+            <For each={groups}>{(g) => <option value={g}>{displayGroup(g)}</option>}</For>
           </select>
         </div>
 
-        <div class="ml-auto">
+        <div class="w-full sm:w-auto sm:ml-auto">
           <button
             onClick={exportToPNG}
             type="button"
-            aria-label={`تصدير الجدول كم الصورة للمجموعة ${selectedGroup()}`}
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50"
+            aria-label={`تصدير الجدول كصورة للمجموعة ${selectedGroup()}`}
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50 w-full sm:w-auto"
           >
             📸 Export as PNG
           </button>
@@ -190,13 +197,10 @@ export default function App() {
       <div class="w-full px-4 mt-4 overflow-auto">
         <Show when={selectedGroup()} keyed>
           {(g) => (
-            <Timetable groupName={g} data={year5[g] as Timetable} setRef={(el) => (captureRef = el)} />
+            <Timetable groupName={g} data={timetableData[g] as Timetable} setRef={(el) => (captureRef = el)} />
           )}
         </Show>
       </div>
     </div>
   );
 }
-
-
-

@@ -1,6 +1,6 @@
 # College Timetable
 
-A web app to view and export weekly college timetables by group. Built with SolidJS, and Tailwind.
+A web app to view and export weekly college timetables by group. Built with SolidJS, Vite, and Tailwind.
 
 ## Getting Started
 
