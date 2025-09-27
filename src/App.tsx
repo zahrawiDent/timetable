@@ -114,18 +114,18 @@ const Timetable = (props: TimetableProps) => {
         </table>
       </div>
       {/* Legend */}
-      <div class="mt-6 flex flex-wrap gap-4 justify-center" aria-label="الشرح" role="group">
-        <ul class="flex flex-wrap gap-4 justify-center" role="list">
-          <li class="flex items-center gap-2">
-            <span class="w-4 h-4 bg-blue-100 border border-blue-300 rounded" aria-hidden="true"></span>
-            <span class="text-sm text-gray-700">Lecture</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-4 h-4 bg-green-100 border border-green-300 rounded" aria-hidden="true"></span>
-            <span class="text-sm text-gray-700">Lab</span>
-          </li>
-        </ul>
-      </div>
+      {/* <div class="mt-6 flex flex-wrap gap-4 justify-center" aria-label="الشرح" role="group"> */}
+      {/*   <ul class="flex flex-wrap gap-4 justify-center" role="list"> */}
+      {/*     <li class="flex items-center gap-2"> */}
+      {/*       <span class="w-4 h-4 bg-blue-100 border border-blue-300 rounded" aria-hidden="true"></span> */}
+      {/*       <span class="text-sm text-gray-700">Lecture</span> */}
+      {/*     </li> */}
+      {/*     <li class="flex items-center gap-2"> */}
+      {/*       <span class="w-4 h-4 bg-green-100 border border-green-300 rounded" aria-hidden="true"></span> */}
+      {/*       <span class="text-sm text-gray-700">Lab</span> */}
+      {/*     </li> */}
+      {/*   </ul> */}
+      {/* </div> */}
     </div>
   );
 };
@@ -199,76 +199,4 @@ export default function App() {
 }
 
 
-
-// import { For, createEffect, onMount } from 'solid-js';
-// import { events, syncManager } from './db';
-//
-// export default function App() {
-//   console.log(new Date().toISOString(), '[ui] App mount')
-//   onMount(() => {
-//     const cursor = events.find({})
-//     console.log(new Date().toISOString(), '[ui] initial local events', cursor.fetch().length)
-//   })
-//
-//   createEffect(() => {
-//     const syncing = syncManager.isSyncing('events')
-//     console.log(new Date().toISOString(), '[ui] syncing state changed:', syncing)
-//   })
-//
-//   // reactively log list changes
-//   createEffect(() => {
-//     const items = events.find({}, { sort: { start: -1 } }).fetch()
-//     console.log(new Date().toISOString(), '[ui] events list changed, count:', items.length)
-//   })
-//   let counter = 1
-//
-//   return (
-//     <div class="min-h-screen bg-gray-50 py-8 ">
-//       <ul>
-//         <li class="flex items-center gap-4">
-//           <span class="text-sm px-2 py-1 rounded bg-gray-200">
-//             {syncManager.isSyncing('events') ? 'syncing' : 'synced'}
-//           </span>
-//           <button
-//             type="button"
-//             onClick={() => {
-//               console.log(new Date().toISOString(), '[ui] Add clicked')
-//               counter++
-//               const now = new Date()
-//               // Let PocketBase generate the id; SignalDB can insert without id
-//               events.insert({ title: `Event ${counter}`, start: now.toISOString(), end: now.toISOString() } as any)
-//             }}
-//           >
-//             Add
-//           </button>
-//           <button
-//             type="button"
-//             onClick={() => {
-//               console.log(new Date().toISOString(), '[ui] Sync now clicked')
-//               syncManager.sync('events', { force: true })
-//             }}
-//           >
-//             Sync now
-//           </button>
-//         </li>
-//
-//         <For each={events.find({}, { sort: { start: -1 } }).fetch()}>{post => (
-//           <li>
-//             <span>{post.title}</span>
-//             <button
-//               class="ml-2 text-sm text-red-600"
-//               onClick={() => {
-//                 console.log(new Date().toISOString(), '[ui] Delete clicked', post.id)
-//                 // delete locally (sync will propagate to PB)
-//                 events.removeOne({ id: post.id })
-//               }}
-//             >
-//               delete
-//             </button>
-//           </li>
-//         )}</For>
-//       </ul>
-//     </div>
-//   );
-// }
 
