@@ -114,18 +114,18 @@ const Timetable = (props: TimetableProps) => {
         </table>
       </div>
       {/* Legend */}
-      <div class="mt-6 flex flex-wrap gap-4 justify-center" aria-label="الشرح" role="group">
-        <ul class="flex flex-wrap gap-4 justify-center" role="list">
-          <li class="flex items-center gap-2">
-            <span class="w-4 h-4 bg-blue-100 border border-blue-300 rounded" aria-hidden="true"></span>
-            <span class="text-sm text-gray-700">Lecture</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-4 h-4 bg-green-100 border border-green-300 rounded" aria-hidden="true"></span>
-            <span class="text-sm text-gray-700">Lab</span>
-          </li>
-        </ul>
-      </div>
+      {/* <div class="mt-6 flex flex-wrap gap-4 justify-center" aria-label="الشرح" role="group"> */}
+      {/*   <ul class="flex flex-wrap gap-4 justify-center" role="list"> */}
+      {/*     <li class="flex items-center gap-2"> */}
+      {/*       <span class="w-4 h-4 bg-blue-100 border border-blue-300 rounded" aria-hidden="true"></span> */}
+      {/*       <span class="text-sm text-gray-700">Lecture</span> */}
+      {/*     </li> */}
+      {/*     <li class="flex items-center gap-2"> */}
+      {/*       <span class="w-4 h-4 bg-green-100 border border-green-300 rounded" aria-hidden="true"></span> */}
+      {/*       <span class="text-sm text-gray-700">Lab</span> */}
+      {/*     </li> */}
+      {/*   </ul> */}
+      {/* </div> */}
     </div>
   );
 };
