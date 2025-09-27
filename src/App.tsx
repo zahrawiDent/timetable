@@ -190,7 +190,7 @@ export default function App() {
             id="export-button"
             data-umami-event="Export button"
           >
-            📸 Export as PNG
+            📸 حفظ كصورة
           </button>
         </div>
       </div>
