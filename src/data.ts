@@ -76,8 +76,8 @@ export const timetableData: Record<string, Timetable> = {
       "09:30-10:30": 'continue',
       "10:30-11:30": 'continue',
       "11:30-12:30": 'continue',
-      "02:30-03:30": { subject: "Periodontics", type: "Lab", span: 2 },
-      "03:30-04:30": "continue",
+      "12:30-01:30": { subject: "Periodontics", type: "Lab", span: 2 },
+      "01:30-02:30": "continue",
     }
   },
   "المجموعة 3-4": {
@@ -87,27 +87,27 @@ export const timetableData: Record<string, Timetable> = {
       "09:30-10:30": "continue",
       "10:30-11:30": "continue",
       "11:30-12:30": "continue",
-      "01:30-02:30": { subject: "Oral Medicine", type: "Lab" },
-      "03:30-04:30": { subject: "Periodontics", type: "Lab", span: 2 },
-      "04:30-05:30": "continue"
+      "01:30-02:30": { subject: "Periodontics", type: "Lab", span: 2 },
+      "02:30-03:30": "continue",
+      "03:30-04:30": { subject: "Oral Medicine", type: "Lab" },
     },
-    "الثلاثاء": {
-      "08:30-09:30": { subject: "Fixed", type: "Lab", span: 4 },
-      "09:30-10:30": "continue",
-      "10:30-11:30": "continue",
-      "11:30-12:30": "continue",
-      "12:30-01:30": { subject: "Oral Surgery", type: "Lab", span: 2 },
-      "01:30-02:30": "continue",
-    },
+    // "الثلاثاء": {
+    // },
     "الأربعاء": {
       "10:30-11:30": { subject: "Pediatrics", type: "Lab", span: 2 },
       "11:30-12:30": "continue",
+      "12:30-01:30": { subject: "Oral Surgery", type: "Lab", span: 2 },
+      "01:30-02:30": "continue",
       "02:30-03:30": { subject: "Removable", type: "Lab", span: 4 },
       "03:30-04:30": 'continue',
       "04:30-05:30": 'continue',
       "05:30-06:30": 'continue',
     },
     "الخميس": {
+      "08:30-09:30": { subject: "Fixed", type: "Lab", span: 4 },
+      "09:30-10:30": "continue",
+      "10:30-11:30": "continue",
+      "11:30-12:30": "continue",
       "12:30-01:30": { subject: "Operative", type: "Lab", span: 4 },
       "01:30-02:30": 'continue',
       "02:30-03:30": 'continue',
@@ -171,10 +171,10 @@ export const timetableData: Record<string, Timetable> = {
       "11:30-12:30": "continue",
       "12:30-01:30": { subject: "Fixed", type: "Lab", span: 2 },
       "01:30-02:30": 'continue',
-      "04:30-05:30": { subject: "Periodontics", type: "Lab", span: 2 },
-      "05:30-06:30": 'continue',
     },
     "الخميس": {
+      "10:30-11:30": { subject: "Periodontics", type: "Lab", span: 2 },
+      "11:30-12:30": 'continue',
       "12:30-01:30": { subject: "Endodontics", type: "Lab", span: 4 },
       "01:30-02:30": 'continue',
       "02:30-03:30": 'continue',
@@ -218,7 +218,8 @@ export const timetableData: Record<string, Timetable> = {
   "المجموعة 11-12": {
     ...commonLectures,
     "السبت": {
-      "08:30-09:30": { subject: "Oral Medicine", type: "Lab" },
+      "10:30-11:30": { subject: "Periodontics", type: "Lab", span: 2 },
+      "11:30-12:30": "continue",
       "12:30-01:30": { subject: "Operative", type: "Lab", span: 4 },
       "01:30-02:30": "continue",
       "02:30-03:30": "continue",
@@ -245,8 +246,7 @@ export const timetableData: Record<string, Timetable> = {
       "01:30-02:30": 'continue',
     },
     "الخميس": {
-      "08:30-09:30": { subject: "Periodontics", type: "Lab", span: 2 },
-      "09:30-10:30": "continue",
+      "08:30-09:30": { subject: "Oral Medicine", type: "Lab" },
     }
   },
   "المجموعة 13-14": {
@@ -294,6 +294,10 @@ export const timetableData: Record<string, Timetable> = {
       "03:30-04:30": "continue",
     },
     "الثلاثاء": {
+      "08:30-09:30": { subject: "Fixed", type: "Lab", span: 4 },
+      "09:30-10:30": 'continue',
+      "10:30-11:30": 'continue',
+      "11:30-12:30": 'continue',
       "12:30-01:30": { subject: "Removable", type: "Lab", span: 4 },
       "01:30-02:30": "continue",
       "02:30-03:30": "continue",
@@ -310,12 +314,8 @@ export const timetableData: Record<string, Timetable> = {
       "04:30-05:30": 'continue',
       "05:30-06:30": 'continue',
     },
-    "الخميس": {
-      "08:30-09:30": { subject: "Fixed", type: "Lab", span: 4 },
-      "09:30-10:30": 'continue',
-      "10:30-11:30": 'continue',
-      "11:30-12:30": 'continue',
-    }
+    // "الخميس": {
+    // }
   },
   "المجموعة 17-18": {
     ...commonLectures,
@@ -336,8 +336,8 @@ export const timetableData: Record<string, Timetable> = {
       "03:30-04:30": "continue",
     },
     "الأربعاء": {
-      "08:30-09:30": { subject: "Periodontics", type: "Lab", span: 2 },
-      "09:30-10:30": "continue",
+      "12:30-01:30": { subject: "Periodontics", type: "Lab", span: 2 },
+      "01:30-02:30": "continue",
       "02:30-03:30": { subject: "Fixed", type: "Lab", span: 4 },
       "03:30-04:30": 'continue',
       "04:30-05:30": 'continue',
