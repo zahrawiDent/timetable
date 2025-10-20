@@ -145,7 +145,7 @@ export const timetableData: Record<string, Timetable> = {
       "02:30-03:30": { subject: "Pediatrics", type: "Lab", span: 2 },
       "03:30-04:30": 'continue',
     },
-    "الخميس": {}
+    // "الخميس": {}
   },
   "المجموعة 7-8": {
     ...commonLectures,
