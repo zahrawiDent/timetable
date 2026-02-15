@@ -16,13 +16,15 @@ import { Footer } from "./components/Footer";
 export default function App() {
   const groups = Object.keys(timetableData);
   const [selectedGroup, setSelectedGroup] = createSignal(groups[0] || "");
+  const [isExporting, setIsExporting] = createSignal(false);
 
   let captureRef: HTMLDivElement | undefined;
 
   const exportToPNG = async () => {
     if (captureRef) {
+      setIsExporting(true);
       try {
-        await domToPng(captureRef, {
+        const dataUrl = await domToPng(captureRef, {
           scale: 2,
           backgroundColor: "#0a1628",
           style: {
@@ -33,14 +35,16 @@ export default function App() {
               url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
             `,
           },
-        }).then((dataUrl) => {
-          const link = document.createElement("a");
-          link.download = `${selectedGroup() || "group"}.png`;
-          link.href = dataUrl;
-          link.click();
         });
+
+        const link = document.createElement("a");
+        link.download = `${selectedGroup() || "group"}.png`;
+        link.href = dataUrl;
+        link.click();
       } catch (error) {
         console.error("Error generating PNG:", error);
+      } finally {
+        setIsExporting(false);
       }
     }
   };
@@ -59,7 +63,7 @@ export default function App() {
           selectedGroup={selectedGroup()}
           onGroupChange={setSelectedGroup}
         />
-        <ExportButton onExport={exportToPNG} />
+        <ExportButton onExport={exportToPNG} isLoading={isExporting()} />
       </div>
 
       <div class="w-full px-4 overflow-auto flex justify-center">

@@ -64,7 +64,9 @@ export const Timetable = (props: TimetableProps) => {
       <Show when={props.groupName}>
         <div class="text-center mb-4">
           <div class="flex items-center justify-center gap-3">
-            <h2 class="ramadan-title text-3xl font-bold">{props.groupName}</h2>
+            <h2 class="ramadan-title text-3xl font-bold whitespace-nowrap" dir="rtl">
+              {props.groupName}
+            </h2>
           </div>
         </div>
       </Show>
