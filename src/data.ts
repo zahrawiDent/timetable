@@ -10,22 +10,31 @@ export const TIME_SLOTS = [
   "05:30-06:30",
 ];
 
+export const LECTURE_TIME_SLOTS = [
+  "09:30-10:15",
+  "10:15-11:00",
+  "11:00-11:45",
+  "11:45-12:30",
+  "12:30-01:15",
+  "01:15-02:00",
+];
+
 const commonLectures: Timetable = {
   الأحد: {
-    "09:30-10:30": { subject: "Operative", type: "Lecture" },
-    "10:30-11:30": { subject: "Fixed", type: "Lecture" },
-    "11:30-12:30": { subject: "Pediatrics", type: "Lecture" },
-    "12:30-01:30": { subject: "Endodontics", type: "Lecture" },
-    "01:30-02:30": { subject: "Oral Surgery", type: "Lecture" },
-    "02:30-03:30": { subject: "Removable", type: "Lecture" },
+    "09:30-10:15": { subject: "Operative", type: "Lecture" },
+    "10:15-11:00": { subject: "Fixed", type: "Lecture" },
+    "11:00-11:45": { subject: "Pediatrics", type: "Lecture" },
+    "11:45-12:30": { subject: "Endodontics", type: "Lecture" },
+    "12:30-01:15": { subject: "Oral Surgery", type: "Lecture" },
+    "01:15-02:00": { subject: "Removable", type: "Lecture" },
   },
   الإثنين: {
-    "09:30-10:30": { subject: "Oral Surgery", type: "Lecture", span: 2 },
-    "10:30-11:30": "continue",
-    "11:30-12:30": { subject: "Oral Medicine", type: "Lecture", span: 2 },
-    "12:30-01:30": "continue",
-    "01:30-02:30": { subject: "Periodontics", type: "Lecture", span: 2 },
-    "02:30-03:30": "continue",
+    "09:30-10:15": { subject: "Oral Surgery", type: "Lecture", span: 2 },
+    "10:15-11:00": "continue",
+    "11:00-11:45": { subject: "Oral Medicine", type: "Lecture", span: 2 },
+    "11:45-12:30": "continue",
+    "12:30-01:15": { subject: "Periodontics", type: "Lecture", span: 2 },
+    "01:15-02:00": "continue",
   },
 };
 

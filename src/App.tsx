@@ -1,30 +1,32 @@
 import { Show, createMemo, createSignal, For } from "solid-js";
-import { TIME_SLOTS, timetableData, type ClassData, type Timetable } from "./data";
+import { TIME_SLOTS, LECTURE_TIME_SLOTS, timetableData, type ClassData, type Timetable } from "./data";
 import html2canvas from 'html2canvas-pro';
 
 type TimetableProps = {
   data: Timetable;
-  groupName?: string; // title for the timetable
-  setRef?: (el: HTMLDivElement) => void; // wrapper ref to include legend in export
+  groupName?: string;
+  daysFilter?: string[];
+  timeSlots?: string[];
 };
 const Timetable = (props: TimetableProps) => {
   const DAY_ORDER = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  const slots = () => props.timeSlots || TIME_SLOTS;
   const days = createMemo(() => {
     const keys = Object.keys(props.data || {});
-    return keys.sort((a, b) => DAY_ORDER.indexOf(a) - DAY_ORDER.indexOf(b));
+    const filtered = props.daysFilter ? keys.filter(d => props.daysFilter!.includes(d)) : keys;
+    return filtered.sort((a, b) => DAY_ORDER.indexOf(a) - DAY_ORDER.indexOf(b));
   });
 
-  // Determine visible time slots: hide trailing slots unused by this group's timetable
   const visibleSlots = createMemo(() => {
-    const slots = TIME_SLOTS;
+    const s = slots();
     const ds = days();
     let lastUsed = -1;
-    for (let i = slots.length - 1; i >= 0; i--) {
-      const slot = slots[i];
+    for (let i = s.length - 1; i >= 0; i--) {
+      const slot = s[i];
       const used = ds.some((d) => !!props.data[d]?.[slot]);
       if (used) { lastUsed = i; break; }
     }
-    return lastUsed >= 0 ? slots.slice(0, lastUsed + 1) : slots;
+    return lastUsed >= 0 ? s.slice(0, lastUsed + 1) : s;
   });
 
   // Get class type color
@@ -46,8 +48,10 @@ const Timetable = (props: TimetableProps) => {
   };
 
   return (
-    <div class="w-fit p-4 bg-white rounded-lg shadow-sm mx-auto" ref={props.setRef}>
-      <h2 id="timetable-title" class="text-2xl font-bold text-gray-800 mb-6 text-center">{props.groupName || 'الجدول الجامعي'}</h2>
+    <div class="w-fit p-4 bg-white rounded-lg shadow-sm mx-auto">
+      <Show when={props.groupName}>
+        <h2 id="timetable-title" class="text-2xl font-bold text-gray-800 mb-6 text-center">{props.groupName}</h2>
+      </Show>
       <div class="shadow-lg rounded-lg mx-auto">
         <table class="border-collapse bg-white mx-auto" aria-labelledby="timetable-title">
           <caption class="sr-only">الجدول: {props.groupName || 'الجدول الجامعي'}</caption>
@@ -198,9 +202,17 @@ export default function App() {
       {/* Timetable */}
       <div class="w-full px-4 mt-4 overflow-auto">
         <Show when={selectedGroup()} keyed>
-          {(g) => (
-            <Timetable groupName={g} data={timetableData[g] as Timetable} setRef={(el) => (captureRef = el)} />
-          )}
+          {(g) => {
+            const data = timetableData[g] as Timetable;
+            const labDays = ['السبت', 'الثلاثاء', 'الأربعاء', 'الخميس'];
+            const lectureDays = ['الأحد', 'الإثنين'];
+            return (
+              <div ref={(el) => (captureRef = el)}>
+                <Timetable groupName={g} data={data} daysFilter={labDays} timeSlots={TIME_SLOTS} />
+                <Timetable data={data} daysFilter={lectureDays} timeSlots={LECTURE_TIME_SLOTS} />
+              </div>
+            );
+          }}
         </Show>
       </div>
     </div>
