@@ -13,6 +13,7 @@ export const ExportButton = (props: ExportButtonProps) => (
     class={`button-ramadan py-3 px-8 rounded-lg shadow-lg focus-visible:outline-none w-full sm:w-auto flex items-center justify-center gap-2 ${props.isLoading ? "opacity-75 cursor-wait" : ""
       }`}
     id="export-button"
+    data-umami-event="Export Timetable"
   >
     <Show when={props.isLoading}>
       <svg
